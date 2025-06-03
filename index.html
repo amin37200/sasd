@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Activision Support</title>
+
+  <!-- فونت Orbitron برای استایل گیمینگ -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
   <style>
     * {
       box-sizing: border-box;
@@ -13,7 +17,7 @@
 
     body {
       background-color: #0f0f0f;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -32,32 +36,67 @@
     }
 
     .support-header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                   url('https://www.activision.com/content/dam/atvi/activision/atvi-touchui/home/hero/COD-MWIII-001-Homepage-hero-desktop.jpg') center/cover no-repeat;
       padding: 80px 20px 30px;
       text-align: center;
       position: relative;
+      border-bottom: 1px solid #00b09b;
     }
 
-    .support-header h1 {
-      font-size: 24px;
-      font-weight: bold;
-      color: white;
-      text-shadow: 0 0 8px #000;
-      margin-bottom: 10px;
+    /* انیمیشن نور برای لوگو */
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 10px #00b09b, 0 0 20px #00b09b, 0 0 30px #00b09b;
+      }
+      50% {
+        text-shadow: 0 0 20px #00f5d4, 0 0 30px #00f5d4, 0 0 40px #00f5d4;
+      }
     }
 
-    .support-header p {
-      color: #ddd;
-      font-size: 14px;
-      text-shadow: 0 0 4px #000;
-    }
-
-    .logo {
+    .text-logo {
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+      text-shadow: 0 0 12px rgba(0,0,0,0.7);
+      cursor: default;
+      user-select: none;
+    }
+
+    .text-logo .activision {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #ffffff, #c0c0c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2.5s infinite alternate;
+    }
+
+    .text-logo .support {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #00b09b;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-top: 3px;
+    }
+
+    .support-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 10px #000;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .search-bar {
@@ -68,13 +107,19 @@
 
     .search-bar input {
       width: 100%;
-      padding: 12px 16px;
+      padding: 14px 18px;
       border-radius: 30px;
       border: none;
-      font-size: 14px;
+      font-size: 15px;
       background-color: #2b2b2b;
       color: white;
       outline: none;
+      transition: box-shadow 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .search-bar input:focus {
+      box-shadow: 0 0 10px #00b09b;
     }
 
     .quick-issues {
@@ -83,30 +128,36 @@
     }
 
     .quick-issues h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
+      font-size: 17px;
+      margin-bottom: 14px;
       color: #ddd;
+      font-weight: 600;
     }
 
     .issue-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
     .issue-button {
-      padding: 8px 12px;
+      padding: 10px 16px;
       background-color: #2a2a2a;
-      border-radius: 20px;
-      font-size: 13px;
+      border-radius: 24px;
+      font-size: 14px;
       cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #3a3a3a;
+      transition: all 0.3s ease;
+      border: 1.5px solid #3a3a3a;
+      box-shadow: 0 0 5px rgba(0,176,155,0.4);
+      font-weight: 600;
+      user-select: none;
     }
 
     .issue-button:hover {
       background-color: #00b09b;
       border-color: #00b09b;
+      box-shadow: 0 0 15px #00b09b;
+      transform: scale(1.07);
     }
 
     .articles {
@@ -118,11 +169,12 @@
     }
 
     .category h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
+      font-size: 20px;
+      margin-bottom: 14px;
       color: #00b09b;
-      border-bottom: 1px solid #333;
-      padding-bottom: 6px;
+      border-bottom: 2px solid #004d43;
+      padding-bottom: 8px;
+      font-weight: 700;
     }
 
     .category ul {
@@ -130,17 +182,19 @@
     }
 
     .category li {
-      padding: 12px 16px;
+      padding: 14px 18px;
       background-color: #2a2a2a;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      font-size: 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-left: 3px solid transparent;
+      border-left: 4px solid transparent;
+      font-weight: 600;
+      user-select: none;
     }
 
     .category li:hover {
@@ -149,118 +203,111 @@
     }
 
     .category li::after {
-      content: ">";
-      color: #666;
+      content: "→";
+      color: #00b09b;
+      font-weight: bold;
+      margin-left: 14px;
+      transition: margin-left 0.3s ease;
+      font-size: 18px;
+    }
+
+    .category li:hover::after {
+      margin-left: 22px;
     }
 
     .no-results {
-      padding: 12px;
+      padding: 14px;
       color: #aaa;
       font-size: 14px;
       display: none;
+      font-style: italic;
     }
 
     .contact-section {
-      padding: 16px;
+      padding: 18px 16px;
       background-color: #161616;
-      border-top: 1px solid #2c2c2c;
+      border-top: 1.5px solid #2c2c2c;
     }
 
     .contact-button {
       display: block;
       width: 100%;
-      padding: 14px;
-      background-color: #00b09b;
+      padding: 16px;
+      background: linear-gradient(90deg, #00b09b, #00f5d4);
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background 0.3s ease;
       text-align: center;
       text-decoration: none;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+      box-shadow: 0 0 15px #00b09b;
     }
 
     .contact-button:hover {
-      background-color: #009982;
+      background: linear-gradient(90deg, #00f5d4, #00b09b);
+      box-shadow: 0 0 25px #00f5d4;
+      transform: scale(1.05);
     }
 
     .footer {
       text-align: center;
-      padding: 16px;
+      padding: 18px 16px;
       font-size: 13px;
       background-color: #161616;
-      border-top: 1px solid #2c2c2c;
+      border-top: 1.5px solid #2c2c2c;
       color: #888;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 8px;
+      gap: 18px;
+      margin-bottom: 10px;
     }
 
     .footer-links a {
-      color: #aaa;
+      color: #00b09b;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.3s ease;
     }
 
     .footer-links a:hover {
-      color: #00b09b;
+      color: #00f5d4;
     }
 
     .footer strong {
       color: #00b09b;
+      font-weight: 700;
     }
 
     @media (max-width: 480px) {
       .support-header h1 {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       .issue-button {
-        font-size: 12px;
-        padding: 6px 10px;
+        font-size: 13px;
+        padding: 8px 12px;
       }
 
       .category h3 {
-        font-size: 16px;
+        font-size: 18px;
+      }
+
+      .category li {
+        font-size: 14px;
+        padding: 12px 14px;
       }
     }
-    .text-logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.2;
-  text-shadow: 0 0 12px rgba(0,0,0,0.7);
-}
-
-.text-logo .activision {
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  color: #ffffff;
-  text-transform: uppercase;
-  background: linear-gradient(to right, #ffffff, #c0c0c0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-logo .support {
-  font-size: 14px;
-  font-weight: 600;
-  color: #00b09b;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 2px;
-}
-
   </style>
 </head>
 <body>
@@ -270,11 +317,6 @@
         <span class="activision">ACTIVISION</span>
         <span class="support">SUPPORT</span>
       </div>
-      
-
-
-
-
       <h1>Hi, how can we help you?</h1>
     </div>
 
