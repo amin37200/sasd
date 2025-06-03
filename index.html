@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activision Support</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    .support-box {
+      background-color: #1e1e1e;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .support-header {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('https://www.activision.com/content/dam/atvi/activision/atvi-touchui/home/hero/COD-MWIII-001-Homepage-hero-desktop.jpg') center/cover no-repeat;
+      padding: 80px 20px 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .support-header h1 {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 8px #000;
+      margin-bottom: 10px;
+    }
+
+    .support-header p {
+      color: #ddd;
+      font-size: 14px;
+      text-shadow: 0 0 4px #000;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 120px;
+    }
+
+    .search-bar {
+      padding: 16px;
+      background-color: #141414;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 30px;
+      border: none;
+      font-size: 14px;
+      background-color: #2b2b2b;
+      color: white;
+      outline: none;
+    }
+
+    .quick-issues {
+      padding: 16px;
+      background-color: #161616;
+    }
+
+    .quick-issues h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    .issue-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .issue-button {
+      padding: 8px 12px;
+      background-color: #2a2a2a;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #3a3a3a;
+    }
+
+    .issue-button:hover {
+      background-color: #00b09b;
+      border-color: #00b09b;
+    }
+
+    .articles {
+      padding: 16px;
+    }
+
+    .category {
+      margin-bottom: 24px;
+    }
+
+    .category h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #00b09b;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+    }
+
+    .category ul {
+      list-style: none;
+    }
+
+    .category li {
+      padding: 12px 16px;
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 3px solid transparent;
+    }
+
+    .category li:hover {
+      background-color: #333;
+      border-left-color: #00b09b;
+    }
+
+    .category li::after {
+      content: ">";
+      color: #666;
+    }
+
+    .no-results {
+      padding: 12px;
+      color: #aaa;
+      font-size: 14px;
+      display: none;
+    }
+
+    .contact-section {
+      padding: 16px;
+      background-color: #161616;
+      border-top: 1px solid #2c2c2c;
+    }
+
+    .contact-button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background-color: #00b09b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .contact-button:hover {
+      background-color: #009982;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 13px;
+      background-color: #161616;
+      border-top: 1px solid #2c2c2c;
+      color: #888;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: #00b09b;
+    }
+
+    .footer strong {
+      color: #00b09b;
+    }
+
+    @media (max-width: 480px) {
+      .support-header h1 {
+        font-size: 20px;
+      }
+
+      .issue-button {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .category h3 {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="support-box">
+    <div class="support-header">
+      <img src="https://www.activision.com/content/dam/atvi/activision/atvi-touchui/common/logos/activision-logo.png" alt="Activision Logo" class="logo">
+      <h1>Hi, how can we help you?</h1>
+      <p>Get support for Call of Duty, Crash Bandicoot and more</p>
+    </div>
+
+    <div class="search-bar">
+      <input type="search" placeholder="Search for articles..." aria-label="Search articles" />
+    </div>
+
+    <div class="quick-issues">
+      <h3>Common Issues</h3>
+      <div class="issue-buttons">
+        <div class="issue-button">Login Problems</div>
+        <div class="issue-button">Purchase Issues</div>
+        <div class="issue-button">Game Bugs</div>
+        <div class="issue-button">Ban Appeals</div>
+        <div class="issue-button">Server Status</div>
+        <div class="issue-button">Two-Factor Auth</div>
+      </div>
+    </div>
+
+    <div class="articles">
+      <div class="category">
+        <h3>Activision Support</h3>
+        <ul id="article-list">
+          <li>Warzone Connection Issues</li>
+          <li>Modern Warfare III Bugs</li>
+          <li>Battle Pass Problems</li>
+          <li>COD Points Missing</li>
+          <li>Account Linking Issues</li>
+        </ul>
+        <div class="no-results" id="no-results">No matching articles found.</div>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <a href="chat.html" class="contact-button">Contact Support</a>
+    </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+      <strong>Powered by Help Shift</strong>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.querySelector('.search-bar input');
+    const allArticles = document.querySelectorAll('#article-list li');
+    const noResults = document.getElementById('no-results');
+
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      let visibleCount = 0;
+
+      allArticles.forEach(item => {
+        if (item.textContent.toLowerCase().includes(filter)) {
+          item.style.display = 'flex';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
