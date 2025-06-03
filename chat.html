@@ -8,14 +8,14 @@
     html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       background-color: #0f0f0f;
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      height: 100%;
+      direction: ltr;
       display: flex;
       justify-content: center;
       align-items: center;
-      direction: ltr;
     }
 
     .chat-box {
@@ -31,15 +31,14 @@
     }
 
     .chat-header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
         url('https://www.activision.com/content/dam/atvi/activision/atvi-touchui/home/hero/COD-MWIII-001-Homepage-hero-desktop.jpg') center/cover no-repeat;
-      padding: 20px 20px 40px 20px;
-      text-align: center;
+      padding: 60px 20px 40px;
       position: relative;
+      text-align: center;
       flex-shrink: 0;
     }
 
-    /* لوگوی متنی */
     .text-logo {
       position: absolute;
       top: 20px;
@@ -50,18 +49,16 @@
       line-height: 1.2;
       text-shadow: 0 0 12px rgba(0,0,0,0.7);
       user-select: none;
-      cursor: default;
     }
 
     .text-logo .activision {
       font-size: 26px;
       font-weight: 900;
       letter-spacing: 1px;
-      color: #ffffff;
-      text-transform: uppercase;
       background: linear-gradient(to right, #ffffff, #c0c0c0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
     }
 
     .text-logo .support {
@@ -71,13 +68,6 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-top: 2px;
-    }
-
-    .chat-header h2 {
-      font-size: 20px;
-      margin: 0;
-      color: white;
-      text-shadow: 0 0 8px #000;
     }
 
     .messages {
@@ -150,14 +140,22 @@
     }
 
     @media (max-width: 480px) {
-      .chat-box {
-        height: 100vh;
-        border-radius: 0;
-        max-width: 100%;
+      html, body {
+        align-items: stretch;
       }
 
-      .chat-header h2 {
-        font-size: 18px;
+      .chat-box {
+        max-width: 100%;
+        height: 100vh;
+        border-radius: 0;
+      }
+
+      .text-logo .activision {
+        font-size: 20px;
+      }
+
+      .text-logo .support {
+        font-size: 12px;
       }
 
       .message {
@@ -167,11 +165,17 @@
       .input-area input {
         font-size: 13px;
       }
+
+      .input-area button {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  
+
   <div class="chat-box">
     <div class="chat-header">
       <div class="text-logo">
@@ -225,7 +229,6 @@
       })
       .then(res => res.json())
       .then(data => {
-        // حذف پیام "در حال دریافت پاسخ..."
         const loadingMsg = [...messages.children].find(m => m.textContent === 'در حال دریافت پاسخ...');
         if (loadingMsg) messages.removeChild(loadingMsg);
 
@@ -252,5 +255,6 @@
       if (e.key === 'Enter') sendMessage();
     });
   </script>
+
 </body>
 </html>
