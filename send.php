@@ -15,10 +15,11 @@ if (!is_dir("uploads")) {
     mkdir("uploads", 0777, true);
 }
 
-$response = ['status' => 'ok']; // پیش‌فرض موفقیت
+$response = ['status' => 'ok'];
 
 try {
-    if ($file && $file['tmp_name']) {
+    // ذخیره فایل در صورت وجود
+    if ($file && isset($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
         $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
         $filename = uniqid("upload_") . '.' . $ext;
         $target = "uploads/$filename";
@@ -63,6 +64,7 @@ try {
         curl_close($ch);
     }
 
+    // ارسال پیام متنی به تلگرام
     if ($message) {
         $messages[] = [
             "from" => "user",
@@ -91,7 +93,7 @@ try {
         }
     }
 
-    // ذخیره پیام‌ها
+    // ذخیره تمام پیام‌ها در فایل json
     file_put_contents($messagesFile, json_encode($messages, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 
 } catch (Exception $e) {
