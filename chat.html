@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="fa" dir="ltr">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Activision Support Chat</title>
 <style>
-  /* کد CSS مثل قبل */
   :root {
     --primary: #00b09b;
     --dark-bg: #0f0f0f;
@@ -209,16 +208,23 @@
           data.append('session', session);
           data.append('message', message);
 
-          const res = await fetch('send.php', { // آدرس اسکریپت PHP شما
+          const res = await fetch('send.php', {
             method: 'POST',
             body: data,
           });
+
+          if (!res.ok) {
+            throw new Error(`خطا در پاسخ سرور: ${res.status} ${res.statusText}`);
+          }
+
           const json = await res.json();
-          if(json.status !== 'ok'){
-            console.error('خطا در ارسال به سرور:', json.error);
+
+          if (json.status !== 'ok') {
+            throw new Error('خطا در ارسال به سرور: ' + (json.error || 'خطای ناشناخته'));
           }
         } catch (err) {
           console.error('خطا در ارسال به سرور:', err);
+          alert('خطا در ارسال به سرور: ' + err.message);
         }
       };
 
@@ -266,7 +272,6 @@
         if (e.key === 'Enter') sendMessage();
       });
 
-      // پیام شروع چت
       setTimeout(() => handleBot(''), 500);
     });
   </script>
