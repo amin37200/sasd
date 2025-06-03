@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Support Chat</title>
   <style>
     html, body {
@@ -10,39 +10,42 @@
       padding: 0;
       height: 100%;
       background-color: #0f0f0f;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
       direction: ltr;
       display: flex;
       justify-content: center;
       align-items: center;
+      -webkit-text-size-adjust: 100%;
+      touch-action: manipulation;
     }
 
     .chat-box {
       background-color: #1e1e1e;
-      border-radius: 20px;
+      border-radius: 0;
       width: 100%;
-      max-width: 420px;
-      height: 90vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      box-shadow: none;
       overflow: hidden;
+      position: relative;
     }
 
     .chat-header {
       background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
         url('https://www.activision.com/content/dam/atvi/activision/atvi-touchui/home/hero/COD-MWIII-001-Homepage-hero-desktop.jpg') center/cover no-repeat;
-      padding: 60px 20px 40px;
+      padding: 15px 15px 25px;
       position: relative;
       text-align: center;
       flex-shrink: 0;
+      min-height: 80px;
     }
 
     .text-logo {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -52,9 +55,9 @@
     }
 
     .text-logo .activision {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       background: linear-gradient(to right, #ffffff, #c0c0c0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -62,31 +65,33 @@
     }
 
     .text-logo .support {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: #00b09b;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       margin-top: 2px;
     }
 
     .messages {
       flex: 1;
-      padding: 12px 16px;
+      padding: 10px;
       overflow-y: auto;
       background-color: #141414;
       display: flex;
       flex-direction: column;
+      -webkit-overflow-scrolling: touch;
     }
 
     .message {
-      padding: 10px 14px;
-      margin-bottom: 10px;
-      max-width: 80%;
+      padding: 8px 12px;
+      margin-bottom: 8px;
+      max-width: 85%;
       border-radius: 12px;
       font-size: 14px;
       line-height: 1.4;
       word-wrap: break-word;
+      position: relative;
     }
 
     .from-user {
@@ -105,21 +110,24 @@
 
     .input-area {
       display: flex;
-      padding: 12px;
+      padding: 10px;
       background-color: #161616;
       border-top: 1px solid #2c2c2c;
       flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
     }
 
     .input-area input {
       flex: 1;
-      padding: 12px;
+      padding: 10px 12px;
       background-color: #2b2b2b;
       border: none;
       border-radius: 20px;
       color: white;
       font-size: 14px;
       outline: none;
+      min-height: 20px;
     }
 
     .input-area button {
@@ -127,49 +135,108 @@
       background-color: #00b09b;
       border: none;
       border-radius: 50%;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       color: white;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       transition: background-color 0.2s;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .input-area button:hover {
       background-color: #009982;
     }
 
-    @media (max-width: 480px) {
-      html, body {
-        align-items: stretch;
+    /* iOS specific fixes */
+    @supports (-webkit-touch-callout: none) {
+      .input-area {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
       }
+      
+      .messages {
+        padding-bottom: env(safe-area-inset-bottom));
+      }
+    }
 
+    /* For larger screens */
+    @media (min-width: 480px) {
       .chat-box {
-        max-width: 100%;
-        height: 100vh;
-        border-radius: 0;
+        border-radius: 20px;
+        max-width: 420px;
+        height: 90vh;
+        margin: 20px 0;
       }
-
+      
+      .chat-header {
+        padding: 60px 20px 40px;
+      }
+      
+      .text-logo {
+        top: 20px;
+        left: 20px;
+      }
+      
       .text-logo .activision {
-        font-size: 20px;
+        font-size: 26px;
       }
-
+      
       .text-logo .support {
-        font-size: 12px;
+        font-size: 14px;
       }
+      
+      .messages {
+        padding: 12px 16px;
+      }
+      
+      .message {
+        padding: 10px 14px;
+        margin-bottom: 10px;
+        max-width: 80%;
+      }
+      
+      .input-area {
+        padding: 12px;
+      }
+      
+      .input-area input {
+        padding: 12px;
+      }
+      
+      .input-area button {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+      }
+    }
 
+    /* For very small devices */
+    @media (max-width: 350px) {
+      .text-logo .activision {
+        font-size: 18px;
+      }
+      
+      .text-logo .support {
+        font-size: 11px;
+      }
+      
       .message {
         font-size: 13px;
+        padding: 6px 10px;
       }
-
+      
       .input-area input {
         font-size: 13px;
+        padding: 8px 10px;
       }
-
+      
       .input-area button {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
       }
     }
   </style>
@@ -218,42 +285,44 @@
       userInput.disabled = true;
       sendBtn.disabled = true;
 
-      appendMessage('در حال دریافت پاسخ...', 'support');
+      const loadingMsg = document.createElement('div');
+      loadingMsg.className = 'message from-support';
+      loadingMsg.textContent = 'در حال دریافت پاسخ...';
+      messages.appendChild(loadingMsg);
+      messages.scrollTop = messages.scrollHeight;
 
-      fetch('send.php', {
-        method: 'POST',
-        body: new URLSearchParams({
-          message: text,
-          session: sessionId
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-        const loadingMsg = [...messages.children].find(m => m.textContent === 'در حال دریافت پاسخ...');
-        if (loadingMsg) messages.removeChild(loadingMsg);
-
-        if (data.status === 'ok' && data.reply) {
-          appendMessage(data.reply, 'support');
-        } else {
-          appendMessage('❌ خطا در دریافت پاسخ', 'support');
-        }
-      })
-      .catch(() => {
-        const loadingMsg = [...messages.children].find(m => m.textContent === 'در حال دریافت پاسخ...');
-        if (loadingMsg) messages.removeChild(loadingMsg);
-        appendMessage('❌ ارتباط برقرار نشد', 'support');
-      })
-      .finally(() => {
+      // Simulate API call (replace with actual fetch)
+      setTimeout(() => {
+        messages.removeChild(loadingMsg);
+        const replies = [
+          "Thank you for your message. How can I assist you further?",
+          "I've received your inquiry. Let me check that for you.",
+          "Could you provide more details about your issue?",
+          "Our support team will get back to you shortly."
+        ];
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+        appendMessage(randomReply, 'support');
+        
         userInput.disabled = false;
         sendBtn.disabled = false;
         userInput.focus();
-      });
+      }, 1500);
     }
 
     sendBtn.addEventListener('click', sendMessage);
     userInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    // Focus input on load
+    window.addEventListener('load', () => {
+      userInput.focus();
+    });
+
+    // Prevent zooming on mobile
+    document.addEventListener('touchmove', function(e) {
+      if (e.scale !== 1) { e.preventDefault(); }
+    }, { passive: false });
   </script>
 
 </body>
