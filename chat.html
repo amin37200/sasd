@@ -139,9 +139,43 @@
         font-size: 13px;
       }
     }
+    .text-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  text-shadow: 0 0 12px rgba(0,0,0,0.7);
+}
+
+.text-logo .activision {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #ffffff, #c0c0c0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-logo .support {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00b09b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
   </style>
 </head>
 <body>
+  <div class="text-logo">
+    <span class="activision">ACTIVISION</span>
+    <span class="support">SUPPORT</span>
+  </div>
   <div class="chat-box">
     <div class="chat-header">
       <img src="https://www.activision.com/content/dam/atvi/activision/atvi-touchui/common/logos/activision-logo.png" alt="Activision Logo" class="logo">
